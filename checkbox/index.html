@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <label>
+        <input type="checkbox" name=""></input>
+        <i class="fa fa-wifi" aria-hidden="true"></i>
+        <span class="check"></span>
+      </label>
+      </li>
+      <li>
+        <label>
+        <input type="checkbox" name=""></input>
+        <i class="fa fa-bluetooth-b" aria-hidden="true"></i>
+        <span class="check"></span>
+      </label>
+      </li>
+      <li>
+        <label>
+        <input type="checkbox" name=""></input>
+        <i class="fa fa-volume-up" aria-hidden="true"></i>
+        <span class="check"></span>
+      </label>
+      </li>
+      <li>
+      <label>
+        <input type="checkbox" name=""></input>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        <span class="check"></span>
+      </label>
+      </li>
+    </ul>
+  </body>
+</html>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #060606;
+  }
+
+  ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  ul li {
+    position: relative;
+    width: 100px;
+    list-style: none;
+    text-align: center;
+  }
+  
+  ul li label  {
+    position: relative;
+  }
+
+  ul li label i,
+  ul li label input[type="checkbox"] {
+    display: block;
+    text-align: center;
+  }
+  
+  /*
+  i.faと書くことで、<i class="fa fa-bluetooth-b" aria-hidden="true"></i>の大きさを指定できる。iだけでは指定はできない。
+  */
+  ul li label i.fa {
+    font-size: 30px;
+    color: #222;
+    transition: 0.5s;
+  }
+
+  ul li label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /*
+  p、div、ul、h1〜h6などのタグの初期値はblock
+  a、span、imgなどのタグの初期値はinline
+  display: block;
+  ⇒要素が横まで広がり、縦に並ぶ。
+  　高さと幅を指定可。
+  　上下左右の余白（padding・margin）を自由に指定可能。
+  　text-align、vertical-alignは指定不可。
+
+  display: inline;
+  ⇒要素が横に並ぶ。
+  　基本的にblockの中で用いられる
+  　高さと幅は指定不可。
+  　左右の余白（padding・margin）は自由に指定可能だが、上下の余白は不可。
+  　text-align、vertical-alignを指定可能。
+  
+  display: inline-block;
+  ⇒blockとinlineの中間。
+  　要素が横に並ぶ。
+  　高さと幅を指定可。
+  　上下左右の余白（padding・margin）を自由に指定可能。
+  　text-align、vertical-alignを指定可能。
+  
+  display: none;⇒非表示。
+  
+  display: flex;⇒blockと同じ振る舞いをしつつ、フレックスボックスモデルの性質を持つ。
+
+  linear-gradient(角度, color1, color2)
+  角度:to top(0deg), to bottom(180deg), to left(270deg), to right(90deg)で初期値はto bottom
+
+　marginは領域間、paddingは領域内のスペースを指す。0以外の数値の後にはpxを付ける。
+  margin(上下左右のmargin)⇒引数が1つ
+  margin(上下のmargin, 左右のmargin)⇒引数が2つ
+  margin(上のmargin, 左右のmargin, 下のmargin)⇒引数が3つ
+  margin(上のmargin, 右のmargin, 下のmargin, 左のmargin)⇒引数が4つ
+  */
+  ul li label .check {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(#000, #333);
+    border-radius: 50%;
+    margin: 10px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  /*
+  contentを付けないとbefore要素は表示されない。
+  */
+  ul li label .check:before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1b1b1b;
+    transition: 0.5s;
+    z-index: 3;
+  }
+  
+  ul li label .check:after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background: #222;
+    border-radius: 50%;
+    z-index: 2;
+    border: 2px solid #161616
+  }
+  /*
+  :checkedは、ラジオボタン（<input type="radio">）、 チェックボックス（<input type="checkbox">）、 オプションボタン（<select> の中の <option>）要素がチェックされていたり on の状態にあったりすることを表す。
+  :checked ~ .check:before⇒チェックされていたら、.check:beforeに以下のスタイルを適用する。
+  rgba()⇒RGBAカラーモデル、RGBに色の透明度であるAlphaを加えたもの。
+  box-shadow(offset-x | offset-y | blur-radius | color)を枠の内側から順にコンマで繋げて書くことで、内側から順に影を表現することができる。
+  box-shadow(offset-x | offset-y | blur-radius | spread-radius | color)
+  */
+  ul li label input[type="checkbox"]:checked ~ .check:before {
+    background: rgba(0, 176, 255, 1);
+    box-shadow: 0 0 10px rgba(0, 176, 255, 1),
+                0 0 15px rgba(0, 176, 255, 1),
+                0 0 20px rgba(0, 176, 255, 1),
+                0 0 0 2px rgba(0, 174, 255, 0.1)
+  }
+
+  ul li label input[type="checkbox"]:checked ~ i.fa {
+    color: rgba(0, 176, 255, 1);
+  }
+</style>
